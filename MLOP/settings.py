@@ -30,8 +30,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '.azurewebsites.net',
     # '169.254.129.3',
-    # 'localhost',
-    # '127.0.0.1',
+    'localhost',
+    '127.0.0.1',
     # 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
@@ -144,3 +144,28 @@ CSRF_COOKIE_SECURE = True
 # XSS & content type protection
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Logging to ignore DisallowedHost spam from Azure health checks
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'ignore_disallowed_hosts': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda record: 'DisallowedHost' not in record.getMessage(),
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'filters': ['ignore_disallowed_hosts'],
+        },
+    },
+    'loggers': {
+        'django.security.DisallowedHost': {
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
