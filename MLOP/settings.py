@@ -29,9 +29,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '.azurewebsites.net',
+    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    # 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
+    
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
 
@@ -166,7 +167,7 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-     'django.request': {           # add this
+     'django.request': {           
             'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
