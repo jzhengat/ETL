@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     ]
 
     # Allow all Azure health check internal IPs (169.254.0.0/16)
-ALLOWED_HOSTS += ['169.254.0.0']
+ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.azurewebsites.net',
