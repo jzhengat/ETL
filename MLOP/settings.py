@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import ipaddress
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
@@ -36,6 +37,9 @@ ALLOWED_HOSTS = [
     # '.azurewebsites.net',
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
+
+    # Allow all Azure health check internal IPs (169.254.0.0/16)
+ALLOWED_HOSTS += [str(ip) for ip in ipaddress.IPv4Network('169.254.0.0/16')]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.azurewebsites.net',
