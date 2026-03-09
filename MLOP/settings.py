@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m+plryv=d(5#e1ol#k#o-%jo5=m5hvdy3pqv&n)h0_1skn3e2+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [ "*",
+ALLOWED_HOSTS = [
     "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
     "localhost",
     "127.0.0.1",
@@ -48,16 +48,19 @@ INSTALLED_APPS = [
     'store',
     'corsheaders',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
-]
+
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CSRF_TRUSTED_ORIGINS = [
     "https://unretaliated-oversweetly-loren.ngrok-free.dev",
+    "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
 ]
 
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,8 +68,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
 ]
 
 ROOT_URLCONF = 'MLOP.urls'
