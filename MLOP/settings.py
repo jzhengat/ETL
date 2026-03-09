@@ -29,12 +29,14 @@ ALLOWED_HOSTS = [
     ".azurewebsites.net",
     "localhost",
     "127.0.0.1",
-    "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
-    "unretaliated-oversweetly-loren.ngrok-free.dev",]
+    # "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+    # "unretaliated-oversweetly-loren.ngrok-free.dev",
+    ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
-    "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+    "https://*.azurewebsites.net",
+    # "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+    # "https://unretaliated-oversweetly-loren.ngrok-free.dev",
 ]
 
 
