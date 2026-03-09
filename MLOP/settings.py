@@ -40,7 +40,7 @@ ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.azurewebsites.net',
-    # 'https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
+    'https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
     # 'https://unretaliated-oversweetly-loren.ngrok-free.dev',
 ]
 
@@ -58,6 +58,25 @@ INSTALLED_APPS = [
     'store',
     'corsheaders',
 ]
+
+# --- Custom middleware to allow Azure health check IPs dynamically ---
+def is_azure_healthcheck(host):
+    """Return True if host is an Azure health check internal IP."""
+    # Strip port if present
+    host_ip = host.split(':')[0]
+    return host_ip.startswith('169.254.')
+
+class AzureHealthCheckMiddleware:
+    """Middleware to allow Azure health check requests from 169.254.*.*"""
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        host = request.get_host()
+        if is_azure_healthcheck(host):
+            # Temporarily override to a valid host to bypass ALLOWED_HOSTS check
+            request.META['HTTP_HOST'] = 'localhost'
+        return self.get_response(request)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -148,6 +167,12 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Insert this middleware right after SecurityMiddleware
+MIDDLEWARE.insert(
+    MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
+    'MLOP.settings.AzureHealthCheckMiddleware'
+)
 
 # Logging to ignore DisallowedHost spam from Azure health checks
 LOGGING = {
