@@ -27,12 +27,12 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
-    "localhost",
-    "127.0.0.1",
-    "169.254.129.1",
-    "169.254.129.2",
-    "169.254.129.4",
     "unretaliated-oversweetly-loren.ngrok-free.dev",]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
+    "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+]
 
 
 # Application definition
@@ -47,17 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'store',
     'corsheaders',
-]
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = False
-CSRF_TRUSTED_ORIGINS = [
-    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
-    "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
-]
-
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -124,15 +114,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# CORS settings
+# ------------------------------
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
+]
+CORS_ALLOW_CREDENTIALS = True
