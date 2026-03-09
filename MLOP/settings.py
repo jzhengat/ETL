@@ -20,13 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m+plryv=d(5#e1ol#k#o-%jo5=m5hvdy3pqv&n)h0_1skn3e2+'
+# SECRET_KEY = 'django-insecure-m+plryv=d(5#e1ol#k#o-%jo5=m5hvdy3pqv&n)h0_1skn3e2+'
+import os
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-secret-for-dev")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
     ".azurewebsites.net",
+    # '169.254.129.3',
     "localhost",
     "127.0.0.1",
     # "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
@@ -123,7 +126,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
-    "https://unretaliated-oversweetly-loren.ngrok-free.dev",
+    # "https://unretaliated-oversweetly-loren.ngrok-free.dev",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
