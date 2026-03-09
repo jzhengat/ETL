@@ -28,11 +28,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.azurewebsites.net',
-    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
-    'localhost',
-    '127.0.0.1',
-    
+    "localhost",
+    "127.0.0.1",
+    "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
+    ".azurewebsites.net",
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
 
