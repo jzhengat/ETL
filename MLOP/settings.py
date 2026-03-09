@@ -29,7 +29,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '.azurewebsites.net',
-    # '169.254.129.3',
     'localhost',
     '127.0.0.1',
     # 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
