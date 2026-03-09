@@ -25,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
+    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
+    '169.254.129.1',
+    '*'
     # '.azurewebsites.net',
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
