@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
-import ipaddress
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -154,28 +153,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'ignore_disallowed_hosts': {
-            '()': 'django.utils.log.CallbackFilter',
-            'callback': lambda record: 'DisallowedHost' not in record.getMessage(),
-        },
-    },
     'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'filters': ['ignore_disallowed_hosts'],
-        },
+        'console': {'class': 'logging.StreamHandler', 'level': 'INFO'},
     },
     'loggers': {
-        'django.security.DisallowedHost': {
-            'handlers': ['console'],
-            'propagate': False,
-        },
-     'django.request': {           
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
+        'django.security.DisallowedHost': {'handlers': ['console'], 'propagate': False},
+        'django.request': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
     },
 }
