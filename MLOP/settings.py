@@ -29,6 +29,8 @@ ALLOWED_HOSTS = [ "*",
     "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net",
     "localhost",
     "127.0.0.1",
+    "169.254.129.1",
+    "169.254.129.2",
     "169.254.129.4",
     "unretaliated-oversweetly-loren.ngrok-free.dev",]
 
