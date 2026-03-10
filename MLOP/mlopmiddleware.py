@@ -1,4 +1,5 @@
 # --- Custom middleware to allow Azure health check IPs dynamically ---
+# mlopmiddleware.py
 def is_azure_healthcheck(host):
     """Return True if host is an Azure health check internal IP."""
     host_ip = host.split(':')[0]
@@ -10,8 +11,7 @@ class AzureHealthCheckMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        host = request.get_host()
+        host = request.META.get('HTTP_HOST', '')  # <-- use META, not get_host()
         if is_azure_healthcheck(host):
-            # Override HTTP_HOST to bypass ALLOWED_HOSTS
             request.META['HTTP_HOST'] = 'localhost'
         return self.get_response(request)
