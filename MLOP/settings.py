@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
     'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    # '.azurewebsites.net',
+    '.azurewebsites.net',
+    '169.254.*.*',
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
 
@@ -60,7 +61,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'mlopmiddleware.AzureHealthCheckMiddleware', 
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
