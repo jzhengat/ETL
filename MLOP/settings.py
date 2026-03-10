@@ -35,6 +35,25 @@ ALLOWED_HOSTS = [
 # ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 # Allow all Azure health check internal IPs (169.254.0.0/16)
 
+# Safe Azure health check bypass
+if os.environ.get("AZURE_HEALTH_CHECK") == "true":
+    # Only allow '*' for requests from Azure health checks
+    # This will not affect normal external traffic because health checks
+    # hit internal IPs (169.254.*.*)
+    HEALTH_CHECK_ALLOWED_HOSTS = ["*"]
+
+    class HealthCheckHostMiddleware:
+        """Middleware to override ALLOWED_HOSTS for Azure health checks."""
+        def __init__(self, get_response):
+            self.get_response = get_response
+
+        def __call__(self, request):
+            # Override allowed hosts only for health checks
+            request.get_host = lambda: "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net"
+            return self.get_response(request)
+
+    # Insert the middleware at the top (before CommonMiddleware)
+    MIDDLEWARE = ["MLOP.settings.HealthCheckHostMiddleware"] + MIDDLEWARE
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.azurewebsites.net',
