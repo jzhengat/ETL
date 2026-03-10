@@ -167,7 +167,7 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+USE_X_FORWARDED_HOST = True
 
 
 # Logging to ignore DisallowedHost spam from Azure health checks
