@@ -59,15 +59,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# --- Custom middleware to allow Azure health check IPs dynamically ---
-def is_azure_healthcheck(host):
-    """Return True if host is an Azure health check internal IP."""
-    # Strip port if present
-    host_ip = host.split(':')[0]
-    return host_ip.startswith('169.254.')
-
-
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
