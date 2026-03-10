@@ -27,10 +27,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*'
-    ]
+ALLOWED_HOSTS = ['*']
 
-    # Allow all Azure health check internal IPs (169.254.0.0/16)
+# Allow all Azure health check internal IPs (169.254.0.0/16)
 # ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 
 CSRF_TRUSTED_ORIGINS = [
