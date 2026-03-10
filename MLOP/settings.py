@@ -27,12 +27,12 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
-    'localhost',
-    '127.0.0.1',
-    '.azurewebsites.net',
-    '169.254.*.*',
+ALLOWED_HOSTS = ['*'
+    # 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
+    # 'localhost',
+    # '127.0.0.1',
+    # '.azurewebsites.net',
+    # '169.254.*.*',
     # 'unretaliated-oversweetly-loren.ngrok-free.dev',
     ]
 
