@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'mlopmiddleware.AzureHealthCheckMiddleware', 
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -149,11 +150,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Insert this middleware right after SecurityMiddleware
-MIDDLEWARE.insert(
-    MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
-    'mlopmiddleware.AzureHealthCheckMiddleware'
-)
+
 
 # Logging to ignore DisallowedHost spam from Azure health checks
 LOGGING = {
