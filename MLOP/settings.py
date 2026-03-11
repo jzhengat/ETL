@@ -46,17 +46,17 @@ ALLOWED_HOSTS = [
 #     # hit internal IPs (169.254.*.*)
 #     HEALTH_CHECK_ALLOWED_HOSTS = ['*']
 
-class HealthCheckHostMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
+# class HealthCheckHostMiddleware:
+#     def __init__(self, get_response):
+#         self.get_response = get_response
 
-    def __call__(self, request):
-        host = request.get_host()
-        if host.startswith('169.254.'):
-            request.get_host = lambda: 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net'
-        return self.get_response(request)
+#     def __call__(self, request):
+#         host = request.get_host()
+#         if host.startswith('169.254.'):
+#             request.get_host = lambda: 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net'
+#         return self.get_response(request)
 
-MIDDLEWARE = ['MLOP.settings.HealthCheckHostMiddleware'] + MIDDLEWARE
+# MIDDLEWARE = ['MLOP.settings.HealthCheckHostMiddleware'] + MIDDLEWARE
 #     # Insert the middleware at the top (before CommonMiddleware)
 #     MIDDLEWARE = ['MLOP.settings.HealthCheckHostMiddleware'] + MIDDLEWARE
 
@@ -82,7 +82,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-     'MLOP.settings.HealthCheckHostMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
