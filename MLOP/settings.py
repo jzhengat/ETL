@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import logging
+from django.core.exceptions import DisallowedHost
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,6 +38,14 @@ ALLOWED_HOSTS = [
     '169.254.129.4',
     '*',
 ]
+
+class IgnoreAzureDisallowedHost(logging.Filter):
+    def filter(self, record):
+        if '169.254.' in str(record.msg):
+            return False
+        return True
+
+logging.getLogger('django.security.DisallowedHost').addFilter(IgnoreAzureDisallowedHost())
 # ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 # Allow all Azure health check internal IPs (169.254.0.0/16)
 
