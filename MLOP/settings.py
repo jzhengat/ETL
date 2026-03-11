@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
     '.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    '169.254.129.3',
+    "169.254.129.3:8000",
+    "169.254.129.4:8000",
     '*',
 ]
 # ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
@@ -81,6 +82,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+     "MLOP.settings.HealthCheckHostMiddleware",
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
