@@ -181,7 +181,10 @@ LOGGING = {
         'console': {'class': 'logging.StreamHandler', 'level': 'INFO'},
     },
     'loggers': {
-        'django.security.DisallowedHost': {'handlers': ['console'], 'propagate': False},
-        'django.request': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
+        'django.security.DisallowedHost': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
