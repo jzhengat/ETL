@@ -32,19 +32,19 @@ ALLOWED_HOSTS = [
     '.azurewebsites.net',
     'localhost',
     '127.0.0.1',
-    "169.254.129.3:8000",
-    "169.254.129.4:8000",
+    '169.254.129.3',
+    '169.254.129.4',
     '*',
 ]
 # ALLOWED_HOSTS += [f'169.254.{i}.{j}' for i in range(256) for j in range(256)]
 # Allow all Azure health check internal IPs (169.254.0.0/16)
 
 # Safe Azure health check bypass
-# if os.environ.get("AZURE_HEALTH_CHECK") == "true":
+# if os.environ.get('AZURE_HEALTH_CHECK') == 'true':
 #     # Only allow '*' for requests from Azure health checks
 #     # This will not affect normal external traffic because health checks
 #     # hit internal IPs (169.254.*.*)
-#     HEALTH_CHECK_ALLOWED_HOSTS = ["*"]
+#     HEALTH_CHECK_ALLOWED_HOSTS = ['*']
 
 class HealthCheckHostMiddleware:
     def __init__(self, get_response):
@@ -52,13 +52,13 @@ class HealthCheckHostMiddleware:
 
     def __call__(self, request):
         host = request.get_host()
-        if host.startswith("169.254."):
-            request.get_host = lambda: "joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net"
+        if host.startswith('169.254.'):
+            request.get_host = lambda: 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net'
         return self.get_response(request)
 
-MIDDLEWARE = ["MLOP.settings.HealthCheckHostMiddleware"] + MIDDLEWARE
+MIDDLEWARE = ['MLOP.settings.HealthCheckHostMiddleware'] + MIDDLEWARE
 #     # Insert the middleware at the top (before CommonMiddleware)
-#     MIDDLEWARE = ["MLOP.settings.HealthCheckHostMiddleware"] + MIDDLEWARE
+#     MIDDLEWARE = ['MLOP.settings.HealthCheckHostMiddleware'] + MIDDLEWARE
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.azurewebsites.net',
@@ -82,7 +82,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-     "MLOP.settings.HealthCheckHostMiddleware",
+     'MLOP.settings.HealthCheckHostMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
