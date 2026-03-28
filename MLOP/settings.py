@@ -13,10 +13,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-for-dev')
 DEBUG = False  # Must be False in production
 
 ALLOWED_HOSTS = [
-    'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
-    '.azurewebsites.net',
-    'localhost',
-    '127.0.0.1',
+    '*'
+    # 'joycedevresource-ddg5hrgbafaccaf6.centralus-01.azurewebsites.net',
+    # '.azurewebsites.net',
+    # 'localhost',
+    # '127.0.0.1',
 ]
 
 # Health check middleware to rewrite Azure internal IPs
@@ -101,7 +102,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
